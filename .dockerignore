@@ -1,0 +1,6 @@
+*.jsonl
+*pytest*
+*pycache*
+.idea
+.venv
+.git
