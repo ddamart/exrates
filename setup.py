@@ -8,9 +8,11 @@ setup(
     install_requires=[
         "requests==2.28.2",
     ],
-    extras_require=[
-        "pytest"
-    ],
+    extras_require={
+        "dev": [
+            "pytest"
+        ]
+    },
     entry_points="""
     [console_scripts]
     exrates=exrates:main
