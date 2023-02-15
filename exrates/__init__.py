@@ -64,7 +64,7 @@ def frankfurter_get_call(url) -> t.Dict:
     # This error might occur instead of a 404 in the Frankfurter API
     # Assume this means empty data
     except requests.exceptions.ChunkedEncodingError as ex:
-        logger.warning(f"Invalid chunk encoding when calling API: {ex}")
+        logger.info(f"Invalid chunk encoding when calling API: {ex}")
         return {}
     # General exception handling for improper cases
     except Exception as ex:
