@@ -13,7 +13,7 @@ It provides two subcommands to work with:
 * Install
 
    ```
-   pip install exrates
+   pip install "git+https://github.com/ddamart/exrates"
    ```
 
 * CLI help
