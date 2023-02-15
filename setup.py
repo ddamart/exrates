@@ -8,7 +8,7 @@ setup(
     install_requires=[
         "requests==2.28.2",
     ],
-    extras_requiere=[
+    extras_require=[
         "pytest"
     ],
     entry_points="""
