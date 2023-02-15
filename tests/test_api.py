@@ -13,7 +13,8 @@ from exrates import frankfurter_get_call
 def get_ok_response():
     mock_response = mock.Mock()
     mock_response.status_code = 200
-    mock_response.json.return_value = {'test':'test'}
+    mock_response.raise_for_status.return_value = None
+    mock_response.json.return_value = {'test': 'test'}
     return mock_response
 
 
@@ -34,10 +35,9 @@ def get_bad_responses():
 
 
 @pytest.fixture()
-def get_chunked_encoding_exc():
+def get_chunked_encoding():
     mock_response = mock.Mock()
     mock_response.raise_for_status.side_effect = requests.exceptions.ChunkedEncodingError
-
     return mock_response
 
 
@@ -75,6 +75,7 @@ def frankfurter_full_requests():
         )
     ]
 
+
 @mock.patch("requests.get")
 def test_ok_status(
         request,
@@ -99,11 +100,11 @@ def test_wrong_status(
 @mock.patch("requests.get")
 def test_chunked_encoding_error(
         request,
-        get_chunked_encoding_exc
+        get_chunked_encoding
 ):
-    request.return_value = get_chunked_encoding_exc
-    with pytest.raises(requests.exceptions.ChunkedEncodingError):
-        frankfurter_get_call(get_chunked_encoding_exc.url)
+    request.return_value = get_chunked_encoding
+    response = frankfurter_get_call(get_chunked_encoding.url)
+    assert response == {}
 
 
 def test_full_api_calls(
@@ -113,6 +114,3 @@ def test_full_api_calls(
         url, response = full_request
         data = frankfurter_get_call(url)
         assert data == response
-
-
-

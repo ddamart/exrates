@@ -48,7 +48,7 @@ def valid_date(s: str) -> datetime:
         raise argparse.ArgumentTypeError(str(ex))
 
 
-def frankfurter_get_call(url) -> t.Dict:
+def frankfurter_get_call(url: str) -> t.Dict:
     """
     Calls Frankfurter API via GET on given path
     :param url: path to call to
